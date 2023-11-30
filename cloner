@@ -1,6 +1,21 @@
+usage="Usage: cloner [options]\n   options:\n      -p, --practicum      Clones the practicum repos"
+
+list=~/CATools/repo_lists/repo_list
+if [ "$#" -eq 1 ]; then
+    if [[ "$1" = "-p" ]] || [[ "$1" = "--practicum" ]]; then
+        list=~/CATools/repo_lists/practicum_list
+    else
+        echo -e "$usage"
+        exit 1
+    fi
+elif [ "$#" -gt 1 ]; then
+    echo -e "$usage"
+    exit 1
+fi
+
 while read repo_list; do
     git clone "$repo_list" &
     
-done < ~/CATools/repo_lists/repo_list
+done < "$list"
 wait
 echo ""

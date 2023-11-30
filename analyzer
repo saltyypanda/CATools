@@ -1,5 +1,8 @@
 #!/bin/bash
 
+output_file="classwork_analysis.txt"
+> "$output_file"
+
 # declares associative array for student keys and repo values
 declare -A student_map
 
@@ -7,8 +10,17 @@ declare -A student_map
 while IFS=$'\t' read -r student repo; do
     student_map["$student"]="$repo"
 
-#   printf 'Student: %s\n' "$student"
-#   printf 'Repo: %s\n\n' "$repo"
-done < <(paste student_list repo_list)
+done < <(paste ~/CATools/student_list ~/CATools/repo_list)
 
-echo ${student_map[@]}
+# echo ${student_map[@]}
+
+# iterates through repo in current working directory and runs a git log
+for repo in */; do
+    if [ -d "$repo" ]; then  # Check if it's a directory
+        # only includes author name, commit message, and only commits since date and until date
+        git -C "$repo" log --oneline --format="%an : %s" --since="2023-11-17 13:00:00" --until="2023-11-17 15:00:00" >> "$output_file"
+        echo "" >> "$output_file"
+    fi
+done
+
+cat "$output_file"

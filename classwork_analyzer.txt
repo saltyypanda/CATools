@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Classwork Number: "
+read classwork_number
+
+while read repo_list; do
+	

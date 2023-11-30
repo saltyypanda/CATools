@@ -1,0 +1,6 @@
+while read repo_list; do
+    git clone "$repo_list" &
+    
+done < ~/CATools/repo_list
+wait
+echo ""

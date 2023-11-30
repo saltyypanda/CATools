@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# declares associative array for student keys and repo values
+declare -A student_map
+
+# iterates through both student_list and repo_list to add to student_map
+while IFS=$'\t' read -r student repo; do
+    student_map["$student"]="$repo"
+
+#   printf 'Student: %s\n' "$student"
+#   printf 'Repo: %s\n\n' "$repo"
+done < <(paste student_list repo_list)
+
+echo ${student_map[@]}

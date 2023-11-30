@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Unit Number: "
+read unit_number
+
+sed -i -r "s/unit../unit$unit_number/g" ~/CATools/repo_list

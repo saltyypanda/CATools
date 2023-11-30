@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Unit Number: "
+read unit_number
+
+mkdir "unit$unit_number"
+cd "unit$unit_number"
+
+mkdir "$unit_number.1" "$unit_number.2" "$unit_number.3"
+
+for repo in */; do
+    cd $repo
+    mkdir classwork homework
+    cd ../
+done
+
+mkdir mini-practicum
+rmdir "$unit_number.3/homework"

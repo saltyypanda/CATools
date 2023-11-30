@@ -3,17 +3,6 @@
 output_file="classwork_analysis.txt"
 > "$output_file"
 
-# declares associative array for student keys and repo values
-declare -A student_map
-
-# iterates through both student_list and repo_list to add to student_map
-while IFS=$'\t' read -r student repo; do
-    student_map["$student"]="$repo"
-
-done < <(paste ~/CATools/student_list ~/CATools/repo_list)
-
-# echo ${student_map[@]}
-
 # iterates through repo in current working directory and runs a git log
 for repo in */; do
     if [ -d "$repo" ]; then  # Check if it's a directory

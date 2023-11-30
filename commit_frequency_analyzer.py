@@ -1,17 +1,4 @@
-FILENAME = "./classwork_analysis.txt"
-
-"""
-def create_dict(filename):
-    student_dict = dict()
-    with open(filename) as file:
-        file_content = file.read()
-        collections = file_content.split("\n*****\n");
-        for index in range(len(collections) - 1): # minus 1 because the last element will always be a list with an empty string
-            student_message_list = collections[index].split("\n")
-            student = student_message_list[0]
-            student_dict[student] = student_message_list[1:]
-    return student_dict
-"""
+FILENAME = "./commit_messages.txt"
 
 def create_dict(filename):
     student_dict = dict()

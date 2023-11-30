@@ -1,18 +1,26 @@
 #!/bin/bash
 
-output_file="classwork_analysis.txt"
-> "$output_file"
+date=""
+if [ "$#" -eq 1 ]; then
+    date="$1"
+fi
+
+commit_messages="commit_messages.txt"
+> "$commit_messages"
 
 # iterates through repo in current working directory and runs a git log
 for repo in */; do
     if [ -d "$repo" ]; then  # Check if it's a directory
         # only includes author name, commit message, and only commits since date and until date
-        git -C "$repo" log -1 --pretty=format:"%an" >> "$output_file"
-        echo "" >> "$output_file"
-        git -C "$repo" log --oneline --format="%s" --since="13:00:00" --until="15:00:00" >> "$output_file"
-        echo "*****" >> "$output_file"
+        git -C "$repo" log -1 --pretty=format:"%an" >> "$commit_messages"
+        echo "" >> "$commit_messages"
+        git -C "$repo" log --oneline --format="%s" --since="$date 13:00:00" --until="$date 15:00:00" >> "$commit_messages"
+        echo "*****" >> "$commit_messages"
     fi
 done
-
 echo ""
-py ~/CATools/commit_file_analyzer.py
+
+commit_frequency_analysis="commit_frequency_analysis.txt"
+> "$commit_frequency_analysis"
+py ~/CATools/commit_frequency_analyzer.py >> "$commit_frequency_analysis"
+cat "$commit_frequency_analysis"

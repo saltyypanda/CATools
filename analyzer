@@ -8,8 +8,11 @@ for repo in */; do
     if [ -d "$repo" ]; then  # Check if it's a directory
         # only includes author name, commit message, and only commits since date and until date
         git -C "$repo" log -1 --pretty=format:"%an" >> "$output_file"
-        echo ":" >> "$output_file"
-        git -C "$repo" log --oneline --format="%s" --since="2023-11-17 13:00:00" --until="2023-11-17 15:00:00" >> "$output_file"
         echo "" >> "$output_file"
+        git -C "$repo" log --oneline --format="%s" --since="2023-11-17 13:00:00" --until="2023-11-17 15:00:00" >> "$output_file"
+        echo "*****" >> "$output_file"
     fi
 done
+
+echo ""
+py ~/CATools/commit_file_analyzer.py

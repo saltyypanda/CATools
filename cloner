@@ -1,15 +1,15 @@
-usage="Usage: cloner [options]\n   options:\n      -p, --practicum      Clones the practicum repos"
+USAGE="Usage: cloner [options] <unit/practicum number (optional)>\n   number: if not declared, will use default\n   options:\n      -p, --practicum      Clones the practicum repos"
 
 list=~/CATools/repo_lists/repo_list
 if [ "$#" -eq 1 ]; then
     if [[ "$1" = "-p" ]] || [[ "$1" = "--practicum" ]]; then
         list=~/CATools/repo_lists/practicum_list
     else
-        echo -e "$usage"
+        echo -e "$USAGE"
         exit 1
     fi
 elif [ "$#" -gt 1 ]; then
-    echo -e "$usage"
+    echo -e "$USAGE"
     exit 1
 fi
 

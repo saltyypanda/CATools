@@ -1,6 +1,0 @@
-while read practicum_list; do
-    git clone "$practicum_list" &
-    
-done < ~/CATools/repo_lists/practicum_list
-wait
-echo ""

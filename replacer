@@ -3,3 +3,6 @@
 unit_number="$1"
 
 sed -i -r "s/unit../unit$unit_number/g" ~/CATools/repo_lists/repo_list
+
+echo ""
+cat ~/CATools/repo_lists/repo_list

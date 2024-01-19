@@ -1,9 +1,16 @@
+#!/bin/bash
+
+ORG_NAME="GCIS-124-2235"
+USERNAME_LIST="/c/Users/esthe/CATools/username_list" # your file path to list of GitHub usernames
+
 USAGE="Usage: cloner [options] <unit/practicum number (optional)>\n   number: if not declared, will use default\n   options:\n      -p, --practicum      Clones the practicum repos"
 
-list=~/CATools/repo_lists/repo_list
+read -p "Number: " number
+
+prefix="unit"
 if [ "$#" -eq 1 ]; then
     if [[ "$1" = "-p" ]] || [[ "$1" = "--practicum" ]]; then
-        list=~/CATools/repo_lists/practicum_list
+        prefix="practicum"
     else
         echo -e "$USAGE"
         exit 1
@@ -13,9 +20,9 @@ elif [ "$#" -gt 1 ]; then
     exit 1
 fi
 
-while read repo_list; do
-    git clone "$repo_list" &
+while read username; do
+    git clone "https://github.com/$ORG_NAME/$prefix$number-$username" &
     
-done < "$list"
+done < "$USERNAME_LIST"
 wait
 echo ""

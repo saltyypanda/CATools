@@ -1,0 +1,17 @@
+USERNAME_LIST="/c/Users/esthe/CATools/username_list" # your file path to list of GitHub usernames
+NAME_LIST="/c/Users/esthe/CATools/name_list" # your file path to list of names associated with the respective GH username
+
+exec 3<"$USERNAME_LIST"
+exec 4<"$NAME_LIST"
+
+while read -r username <&3 && read -r name <&4; do
+    matching_dir=$(find . -maxdepth 1 -type d -name \*-"$username" -print -quit)
+    if [[ -n $matching_dir ]]; then
+        mv "$matching_dir" "$name"
+    else
+        echo "Repo not found."
+    fi
+done
+
+exec 3<&-
+exec 4<&-
